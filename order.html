@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的订单</title>
+    <style>
+        /* 设置页面全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: #f5f5f5;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 主界面样式 */
+        .main-container {
+            width: 640px;
+            height: 100vh;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-bottom: 60px; /* 为底部导航预留空间 */
+        }
+
+        /* 顶部标题栏 */
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        /* 标签栏样式 */
+        .tab-bar {
+            display: flex;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+            flex-shrink: 0;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: 1em;
+            color: #007bff;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid #007bff;
+            font-weight: bold;
+        }
+
+        /* 内容区域布局 */
+        .content {
+            flex: 1;
+            display: flex;
+            overflow-y: auto; /* 允许滚动 */
+        }
+
+        .status-menu {
+            width: 20%;
+            background-color: #f9f9f9;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+        }
+
+        .status-item {
+            padding: 10px;
+            font-size: 1em;
+            color: #333;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .status-item:hover,
+        .status-item.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .order-content {
+            width: 80%;
+            text-align: center;
+            color: #888;
+            font-size: 1.2em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner {
+            margin: 10px 0;
+        }
+
+        .banner img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        /* 底部导航栏固定样式 */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            border-top: 1px solid #ddd;
+            background-color: #ffffff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .bottom-item {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .bottom-item:hover {
+            color: #007bff;
+        }
+
+        .bottom-item.active {
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- 顶部标题栏 -->
+        <div class="header">我的订单</div>
+
+        <!-- 标签栏 -->
+        <div class="tab-bar">
+            <div class="tab active" onclick="filterOrders('all')">全部</div>
+            <div class="tab" onclick="filterOrders('代练中')">代练中</div>
+            <div class="tab" onclick="filterOrders('待验收')">待验收</div>
+            <div class="tab" onclick="filterOrders('已撤销')">已撤销</div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <div class="status-menu">
+                <div class="status-item active">全部</div>
+                <div class="status-item">代练中</div>
+                <div class="status-item">待验收</div>
+                <div class="status-item">撤销中</div>
+                <div class="status-item">异常</div>
+                <div class="status-item">锁定</div>
+                <div class="status-item">已撤销</div>
+                <div class="status-item">已结算</div>
+                <div class="status-item">客服已处理</div>
+                <div class="status-item">强制撤销</div>
+            </div>
+
+            <div class="order-content">
+                <div>暂无相关订单</div>
+                <div class="banner">
+                    <img src="https://via.placeholder.com/300x100" alt="广告横幅">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="bottom-bar">
+        <div class="bottom-item" onclick="navigateToHome()">首页</div>
+        <div class="bottom-item" onclick="navigateToOrderHall()">接单大厅</div>
+        <div class="bottom-item active" onclick="navigateToOrders()">我的订单</div>
+        <div class="bottom-item" onclick="navigateToProfile()">个人中心</div>
+    </div>
+
+    <script>
+        function filterOrders(status) {
+            alert("筛选订单：" + status);
+        }
+
+        function navigateToHome() {
+            window.location.href = "index.html"; // 替换为首页实际路径
+        }
+
+        function navigateToOrderHall() {
+            window.location.href = "order-hall.html"; // 替换为接单大厅路径
+        }
+
+        function navigateToOrders() {
+            window.location.href = "order.html"; // 替换为订单页面路径
+        }
+
+        function navigateToProfile() {
+            window.location.href = "profile.html"; // 替换为个人中心页面路径
+        }
+    </script>
+</body>
+</html>
